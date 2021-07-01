@@ -1,0 +1,12 @@
+img[src*="#thumbnail"] {
+   max-width:200px;
+   height:auto;
+}
+
+.gallery-card {
+  border: 1px solid grey;
+  border-radius: 5px;
+  float: left;
+  margin: 10px;
+  padding: 5px;
+}
