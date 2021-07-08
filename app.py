@@ -42,25 +42,32 @@ images_file = 'mosth-beulah-metadata.csv'
 df = pd.read_csv(os.path.join(ASSETS_PATH, images_file))
 # df['md_html'] = '<img src="' + df['Image'] + '" alt="'+ df['Description'] + '" title="'+ df['Description'] + '" width="150" height="100" />'
 
-
+# Get dataframe with images information for display
 images = df.copy()
 images['Details'] = images.apply(lambda x: x['Title'] + '\n  ' + x['Description'] + '\n  ' +x['Entry_ID'], axis=1)
 images['image_url_thumbnail'] = images.apply(lambda x: x['Image_url'] + '#thumbnail', axis=1)
 images['Photo'] = images.apply(lambda x: '![]({})'.format(x['image_url_thumbnail']), axis=1)
 # images = images[['Photo','Details']]
 
+# index image data by entry ID
+image_search = df.set_index('Entry_ID')
+
 # ----------------------------------------------------------------------------
 # Create Gallery of Cards
 # ----------------------------------------------------------------------------
-df = images.head(10)
+df10 = images.head(10)
 def build_gallery(df):
     # gallery = [html.P(Title) for Title in df['Details']]
+    image_list = [
+         (entry_id, photo, photo_title) for entry_id, photo, photo_title in zip(df['Entry_ID'], df['Photo'], df['Title'])
+    ]
     gallery = [
                 html.Div([
                     html.Div(dcc.Markdown(photo)),
-                    html.P(photo_title)
-                ], className='gallery-card', id={'index': photo_index, 'type': 'image-card' })
-        for photo_index, photo, photo_title  in zip(images['index'], images['Photo'], images['Title'])
+                    html.Div(photo_title),
+                     html.Button(entry_id, id={'index':entry_id, 'type':'select_button'}, n_clicks = 0)
+                ], className='gallery-card', id={'index': entry_id, 'type': 'image-card' })
+        for i, (entry_id, photo, photo_title)  in enumerate(image_list)
     ]
     return gallery
 
@@ -76,43 +83,36 @@ app = dash.Dash(__name__,
                 )
 
 app.layout = html.Div([
-    html.Div(id = 'testy'),
-    html.H2("Pinpoint pictures on a Map"),
-    # html.Div(children = build_gallery(df)),
     dbc.Row([
         dbc.Col([
-            html.Div([
-                    dt.DataTable(
-                        id='table',
-                        columns=[
-                                 {'name': i, 'id': i,'type':'text' ,'presentation':'markdown'} for i in ('Photo','Details')
-                                 # ,'presentation':'markdown'
-                                 ],
-                        data=images.to_dict('records'),
-                        page_size= 5,
-                         style_cell={
-                         'whiteSpace': 'pre-line'
-                         }
-                    )
-            ]),
-            # html.Iframe(src="https://hub.catalogit.app/4837/folder/1d330100-93ce-11eb-9bd8-bb7a6aa1a9bb",
-            # style={"height": "1067px", "width": "100%"})
-        ],width = 3),
-        dbc.Col([
-            dl.Map([dl.TileLayer(), dl.LayerGroup(id="layer")],
-                    center=[26.903, -98.158], zoom=8,
-                   id="map",
-                   style={'width': '100%', 'height': '50vh', 'margin': "auto", "display": "block"}),
-           html.Div([
-            html.P('''Look through the image gallery at left. If you find a picture where you know the location, click to enlarge,
-            copy and paste the object ID into the box below, and select the location on the map above.'''),
-            dcc.Input(id="input_object_ID",
-                    type="text",
-                    placeholder="Enter image Object ID"),
-            html.Div(id='map_location'),
-           ])
-        ], width = 4),
+            html.H2("Pinpoint pictures on a Map"),
+            html.Div('Testy!', id='testy'),
+            html.Div(
+                build_gallery(df10)
+            ),
+        ],width=12),
+
     ]),
+
+    html.Div([
+        html.Button('Button in form', id='btn_hide', n_clicks = 0),
+        dbc.Row([
+            dbc.Col([
+                html.Div(id ='selected_image'),
+            ],width=4),
+            dbc.Col([
+                dl.Map([dl.TileLayer(), dl.LayerGroup(id="layer")],
+                        center=[26.903, -98.158], zoom=8,
+                       id="map",
+                       style={'width': '100%', 'height': '50vh', 'margin': "auto", "display": "block"}),
+               html.Div(id='map_location'),
+            ],width=8)
+
+        ],id='data_entry'),
+        dbc.Row(
+            html.Button('TOBE: Submit Form', id='btn_submit', n_clicks = 0),
+        )
+    ],id='data-entry=form', style = {'border':'1px solid blue','margin':'15px'}),
 
 ])
 
@@ -120,6 +120,38 @@ app.layout = html.Div([
 # ----------------------------------------------------------------------------
 # DATA CALLBACKS
 # ----------------------------------------------------------------------------
+
+@app.callback(
+    Output('testy','children'),
+    Input('btn_hide','n_clicks'),
+    Input({'type':'select_button','index': ALL}, 'n_clicks')
+    )
+def show_box(hide_n_clicks, image_n_clicks):
+    triggered = dash.callback_context.triggered[0]['prop_id'].replace('.n_clicks','')
+    if triggered == 'btn_hide':
+        return 'Hide the Input Form'
+    else:
+        return  'Show the Input Form'
+
+@app.callback(
+    Output('selected_image','children'),
+    Input({'type':'select_button','index': ALL}, 'n_clicks'),
+    State({'type':'select_button','index': ALL}, 'id'),
+    )
+def show_box(n_clicks, entry_id):
+    # get index of clicked image
+    triggered = dash.callback_context.triggered[0]['prop_id'].replace('.n_clicks','')
+    trigger = json.loads(triggered)
+    trigger_index = trigger['index']
+    # get image url from image
+    image_url = image_search.at[trigger_index,'Image_url']
+    kids = html.Div(html.Img(src=image_url))
+    return kids #"{}".format(image_url)
+
+    # triggered_prop_id = dash.callback_context.triggered[0]['prop_id']
+    # entry_id = re.search('asdf=5;(.*)123jasd', s)
+    # return triggered_prop_id
+
 
 @app.callback([Output("layer", "children"),Output("map_location", "children")], [Input("map", "click_lat_lng")])
 def map_click(click_lat_lng):
@@ -129,6 +161,7 @@ def map_click(click_lat_lng):
         new_layer_children = [dl.Marker(position=click_lat_lng, children=dl.Tooltip("({:.3f}, {:.3f})".format(*click_lat_lng)))]
         message = 'You have selected a point at {:.3f}, {:.3f}'.format(*click_lat_lng)
         return new_layer_children, message
+
 # ----------------------------------------------------------------------------
 # RUN APPLICATION
 # ----------------------------------------------------------------------------
