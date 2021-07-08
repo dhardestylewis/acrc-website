@@ -148,10 +148,6 @@ def show_box(n_clicks, entry_id):
     kids = html.Div(html.Img(src=image_url))
     return kids #"{}".format(image_url)
 
-    # triggered_prop_id = dash.callback_context.triggered[0]['prop_id']
-    # entry_id = re.search('asdf=5;(.*)123jasd', s)
-    # return triggered_prop_id
-
 
 @app.callback([Output("layer", "children"),Output("map_location", "children")], [Input("map", "click_lat_lng")])
 def map_click(click_lat_lng):
