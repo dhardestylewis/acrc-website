@@ -124,7 +124,7 @@ sidebar = html.Div(
         html.Div('Testy!', id='testy'),
         html.P(
             "A simple sidebar", className="lead"
-        )
+        ),
         html.Div(
             build_gallery(df10)
         )
