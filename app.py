@@ -113,8 +113,10 @@ SIDEBAR_STYLE = {
 CONTENT_STYLE = {
     "margin-left" : "18rem",
     "margin-right" : "2rem",
+    'margin' : '15px',
     "padding" : "2rem 1rem",
-    "display" : "inline-block"
+    "display" : "inline-block",
+    'border' : '1px solid blue'
 }
 
 sidebar = html.Div(
@@ -130,6 +132,45 @@ sidebar = html.Div(
         )
     ],
     style = SIDEBAR_STYLE
+)
+
+maindiv = html.Div(
+#    id = "first-div",
+   id = 'data-entry=form',
+    children = [
+        dbc.Row(
+            html.Button('Button in form', id='btn_hide', n_clicks = 0)
+        ),
+        dbc.Row(
+            [
+                dbc.Col([
+                    dl.Map(
+                        [dl.TileLayer(), dl.LayerGroup(id="layer")],
+                        center = [26.903, -98.158],
+                        zoom = 8,
+                        id = "map",
+                        style = {
+                            'width' : '100%',
+                            'height' : '50vh',
+                            'margin' : "auto",
+                            "display" : "block"
+                        }
+                    ),
+                    html.Div(id='map_location')
+                ], width=8)
+            ],
+            id = 'data_entry'
+        ),
+        dbc.Row(
+            html.Button('TOBE: Submit Form', id='btn_submit', n_clicks = 0)
+        ),
+        dbc.Row(
+            dbc.Col([
+                html.Div(id = 'selected_image')
+            ], width=4),
+        )
+    ],
+    style = CONTENT_STYLE
 )
 
 app.layout = html.Div([
@@ -151,46 +192,6 @@ app.layout = html.Div([
 #        ]
 #    ),
 
-    html.Div(
-        [
-            dbc.Row(
-                html.Button('Button in form', id='btn_hide', n_clicks = 0)
-            ),
-            dbc.Row(
-                [
-#                    dbc.Col([
-#                        html.Div(id = 'selected_image')
-#                    ], width=4),
-                    dbc.Col([
-                        dl.Map(
-                            [dl.TileLayer(), dl.LayerGroup(id="layer")],
-                            center = [26.903, -98.158],
-                            zoom = 8,
-                            id = "map",
-                            style = {
-                                'width' : '100%',
-                                'height' : '50vh',
-                                'margin' : "auto",
-                                "display" : "block"
-                            }
-                        ),
-                        html.Div(id='map_location')
-                    ], width=8)
-                ],
-                id = 'data_entry'
-            ),
-            dbc.Row(
-                html.Button('TOBE: Submit Form', id='btn_submit', n_clicks = 0)
-            ),
-            dbc.Row(
-                dbc.Col([
-                    html.Div(id = 'selected_image')
-                ], width=4),
-            )
-        ],
-        id = 'data-entry=form',
-        style = {'border' : '1px solid blue', 'margin' : '15px'}
-    )
 
 ])
 
