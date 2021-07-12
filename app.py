@@ -119,7 +119,7 @@ CONTENT_STYLE = {
 
 sidebar = html.Div(
     [
-        html.H2("Sidebar", classname="display-4"),
+        html.H2("Sidebar", className="display-4"),
         html.Hr(),
         html.Div('Testy!', id='testy'),
         html.P(
