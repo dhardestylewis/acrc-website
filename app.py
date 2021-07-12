@@ -136,20 +136,20 @@ app.layout = html.Div([
 
     sidebar,
 
-    dbc.Row(
-        [
-            dbc.Col(
-                [
-                    html.H2("Pinpoint pictures on a Map"),
-                    html.Div('Testy!', id='testy'),
-                    html.Div(
-                        build_gallery(df10)
-                    )
-                ],
-                width = 12
-            ),
-        ]
-    ),
+#    dbc.Row(
+#        [
+#            dbc.Col(
+#                [
+#                    html.H2("Pinpoint pictures on a Map"),
+#                    html.Div('Testy!', id='testy'),
+#                    html.Div(
+#                        build_gallery(df10)
+#                    )
+#                ],
+#                width = 12
+#            ),
+#        ]
+#    ),
 
     html.Div(
         [
