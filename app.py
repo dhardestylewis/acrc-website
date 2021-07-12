@@ -181,7 +181,7 @@ app.layout = html.Div([
             ),
             dbc.Row(
                 html.Button('TOBE: Submit Form', id='btn_submit', n_clicks = 0)
-            )
+            ),
             dbc.Row(
                 dbc.Col([
                     html.Div(id = 'selected_image')
