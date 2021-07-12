@@ -105,6 +105,7 @@ SIDEBAR_STYLE = {
     "top" : 0,
     "left" : 0,
     "bottom" : 0,
+#   width = 12
     "width" : "16rem",
     "padding" : "2rem 1rem",
     "background-color" : "#f8f9fa"
@@ -173,27 +174,7 @@ maindiv = html.Div(
     style = CONTENT_STYLE
 )
 
-app.layout = html.Div([
-
-    sidebar,
-
-#    dbc.Row(
-#        [
-#            dbc.Col(
-#                [
-#                    html.H2("Pinpoint pictures on a Map"),
-#                    html.Div('Testy!', id='testy'),
-#                    html.Div(
-#                        build_gallery(df10)
-#                    )
-#                ],
-#                width = 12
-#            ),
-#        ]
-#    ),
-
-
-])
+app.layout = html.Div([sidebar,maindiv])
 
 # ----------------------------------------------------------------------------
 # DATA CALLBACKS
