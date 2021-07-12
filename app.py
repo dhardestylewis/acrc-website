@@ -29,7 +29,6 @@ from dash.dependencies import Input, Output, State, ALL, MATCH
 from dash.exceptions import PreventUpdate
 
 
-
 # ----------------------------------------------------------------------------
 # CONFIG SETTINGS
 # ----------------------------------------------------------------------------
@@ -59,15 +58,27 @@ df10 = images.head(10)
 def build_gallery(df):
     # gallery = [html.P(Title) for Title in df['Details']]
     image_list = [
-         (entry_id, photo, photo_title) for entry_id, photo, photo_title in zip(df['Entry_ID'], df['Photo'], df['Title'])
+         (entry_id, photo, photo_title)
+         for entry_id, photo, photo_title
+         in zip(df['Entry_ID'], df['Photo'], df['Title'])
     ]
     gallery = [
-                html.Div([
-                    html.Div(dcc.Markdown(photo)),
-                    html.Div(photo_title),
-                     html.Button(entry_id, id={'index':entry_id, 'type':'select_button'}, n_clicks = 0)
-                ], className='gallery-card', id={'index': entry_id, 'type': 'image-card' })
-        for i, (entry_id, photo, photo_title)  in enumerate(image_list)
+        html.Div(
+            [
+                html.Div(dcc.Markdown(photo)),
+                html.Div(photo_title),
+                html.Button(
+                    entry_id,
+                    id = {'index' : entry_id, 'type' : 'select_button'},
+                    n_clicks = 0
+                )
+            ],
+            className = 'gallery-card',
+            id = {'index' : entry_id, 'type' : 'image-card'},
+            n_clicks = 0
+        )
+        for i, (entry_id, photo, photo_title)
+        in enumerate(image_list)
     ]
     return gallery
 
@@ -76,46 +87,112 @@ def build_gallery(df):
 # ----------------------------------------------------------------------------
 external_stylesheets_list = [dbc.themes.SANDSTONE] #  set any external stylesheets
 
-app = dash.Dash(__name__,
-                prevent_initial_callbacks=True,
-                external_stylesheets=external_stylesheets_list,
-                meta_tags=[{'name': 'viewport', 'content': 'width=device-width, initial-scale=1'}],
-                )
+app = dash.Dash(
+    __name__,
+    prevent_initial_callbacks = True,
+    external_stylesheets = external_stylesheets_list,
+    meta_tags = [{
+        'name' : 'viewport',
+        'content' : 'width=device-width, initial-scale=1'
+    }],
+    suppress_callback_exceptions = True
+)
+
+#app.config['SQLALCHEMY_DATABASE_URI'] = 'postgresql://postgres:123456@localhost/lexus'
+
+SIDEBAR_STYLE = {
+    "position" : "fixed",
+    "top" : 0,
+    "left" : 0,
+    "bottom" : 0,
+    "width" : "16rem",
+    "padding" : "2rem 1rem",
+    "background-color" : "#f8f9fa"
+}
+
+CONTENT_STYLE = {
+    "margin-left" : "18rem",
+    "margin-right" : "2rem",
+    "padding" : "2rem 1rem",
+    "display" : "inline-block"
+}
+
+sidebar = html.Div(
+    [
+        html.H2("Sidebar", classname="display-4"),
+        html.Hr(),
+        html.Div('Testy!', id='testy'),
+        html.P(
+            "A simple sidebar", className="lead"
+        )
+        html.Div(
+            build_gallery(df10)
+        )
+    ],
+    style = SIDEBAR_STYLE
+)
 
 app.layout = html.Div([
-    dbc.Row([
-        dbc.Col([
-            html.H2("Pinpoint pictures on a Map"),
-            html.Div('Testy!', id='testy'),
-            html.Div(
-                build_gallery(df10)
+
+    sidebar,
+
+    dbc.Row(
+        [
+            dbc.Col(
+                [
+                    html.H2("Pinpoint pictures on a Map"),
+                    html.Div('Testy!', id='testy'),
+                    html.Div(
+                        build_gallery(df10)
+                    )
+                ],
+                width = 12
             ),
-        ],width=12),
+        ]
+    ),
 
-    ]),
-
-    html.Div([
-        html.Button('Button in form', id='btn_hide', n_clicks = 0),
-        dbc.Row([
-            dbc.Col([
-                html.Div(id ='selected_image'),
-            ],width=4),
-            dbc.Col([
-                dl.Map([dl.TileLayer(), dl.LayerGroup(id="layer")],
-                        center=[26.903, -98.158], zoom=8,
-                       id="map",
-                       style={'width': '100%', 'height': '50vh', 'margin': "auto", "display": "block"}),
-               html.Div(id='map_location'),
-            ],width=8)
-
-        ],id='data_entry'),
-        dbc.Row(
-            html.Button('TOBE: Submit Form', id='btn_submit', n_clicks = 0),
-        )
-    ],id='data-entry=form', style = {'border':'1px solid blue','margin':'15px'}),
+    html.Div(
+        [
+            dbc.Row(
+                html.Button('Button in form', id='btn_hide', n_clicks = 0)
+            ),
+            dbc.Row(
+                [
+#                    dbc.Col([
+#                        html.Div(id = 'selected_image')
+#                    ], width=4),
+                    dbc.Col([
+                        dl.Map(
+                            [dl.TileLayer(), dl.LayerGroup(id="layer")],
+                            center = [26.903, -98.158],
+                            zoom = 8,
+                            id = "map",
+                            style = {
+                                'width' : '100%',
+                                'height' : '50vh',
+                                'margin' : "auto",
+                                "display" : "block"
+                            }
+                        ),
+                        html.Div(id='map_location')
+                    ], width=8)
+                ],
+                id = 'data_entry'
+            ),
+            dbc.Row(
+                html.Button('TOBE: Submit Form', id='btn_submit', n_clicks = 0)
+            )
+            dbc.Row(
+                dbc.Col([
+                    html.Div(id = 'selected_image')
+                ], width=4),
+            )
+        ],
+        id = 'data-entry=form',
+        style = {'border' : '1px solid blue', 'margin' : '15px'}
+    )
 
 ])
-
 
 # ----------------------------------------------------------------------------
 # DATA CALLBACKS
@@ -125,19 +202,19 @@ app.layout = html.Div([
     Output('testy','children'),
     Input('btn_hide','n_clicks'),
     Input({'type':'select_button','index': ALL}, 'n_clicks')
-    )
+)
 def show_box(hide_n_clicks, image_n_clicks):
     triggered = dash.callback_context.triggered[0]['prop_id'].replace('.n_clicks','')
     if triggered == 'btn_hide':
         return 'Hide the Input Form'
     else:
-        return  'Show the Input Form'
+        return 'Show the Input Form'
 
 @app.callback(
     Output('selected_image','children'),
     Input({'type':'select_button','index': ALL}, 'n_clicks'),
     State({'type':'select_button','index': ALL}, 'id'),
-    )
+)
 def show_box(n_clicks, entry_id):
     # get index of clicked image
     triggered = dash.callback_context.triggered[0]['prop_id'].replace('.n_clicks','')
@@ -149,12 +226,25 @@ def show_box(n_clicks, entry_id):
     return kids #"{}".format(image_url)
 
 
-@app.callback([Output("layer", "children"),Output("map_location", "children")], [Input("map", "click_lat_lng")])
+@app.callback(
+    [
+        Output("layer", "children"),
+        Output("map_location", "children")
+    ],
+    [
+        Input("map", "click_lat_lng")
+    ]
+)
 def map_click(click_lat_lng):
     if click_lat_lng is None:
         raise PreventUpdate
     else:
-        new_layer_children = [dl.Marker(position=click_lat_lng, children=dl.Tooltip("({:.3f}, {:.3f})".format(*click_lat_lng)))]
+        new_layer_children = [
+            dl.Marker(
+                position = click_lat_lng,
+                children = dl.Tooltip("({:.3f}, {:.3f})".format(*click_lat_lng))
+            )
+        ]
         message = 'You have selected a point at {:.3f}, {:.3f}'.format(*click_lat_lng)
         return new_layer_children, message
 

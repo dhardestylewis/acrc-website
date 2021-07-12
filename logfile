@@ -1,0 +1,12 @@
+2021-07-08 21:40:22.206 CDT [52852] LOG:  starting PostgreSQL 13.3 on x86_64-apple-darwin19.6.0, compiled by Apple clang version 11.0.3 (clang-1103.0.32.62), 64-bit
+2021-07-08 21:40:22.210 CDT [52852] LOG:  listening on IPv6 address "::1", port 5432
+2021-07-08 21:40:22.210 CDT [52852] LOG:  listening on IPv4 address "127.0.0.1", port 5432
+2021-07-08 21:40:22.210 CDT [52852] LOG:  listening on Unix socket "/tmp/.s.PGSQL.5432"
+2021-07-08 21:40:22.214 CDT [52853] LOG:  database system was shut down at 2021-07-08 21:40:17 CDT
+2021-07-08 21:40:22.217 CDT [52852] LOG:  database system is ready to accept connections
+2021-07-10 14:10:00.325 CDT [60899] FATAL:  role "postgres" does not exist
+2021-07-10 14:43:18.615 CDT [52852] LOG:  received fast shutdown request
+2021-07-10 14:43:18.616 CDT [52852] LOG:  aborting any active transactions
+2021-07-10 14:43:18.618 CDT [52852] LOG:  background worker "logical replication launcher" (PID 52859) exited with exit code 1
+2021-07-10 14:43:18.619 CDT [52854] LOG:  shutting down
+2021-07-10 14:43:18.632 CDT [52852] LOG:  database system is shut down
