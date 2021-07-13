@@ -141,7 +141,7 @@ maindiv = html.Div(
 #    id = "first-div",
     id = 'data-entry=form',
     children = [
-        html.Div(
+        html.Div([
             dbc.Row(
                 dbc.Col(
                     html.Button('Button in form', id='btn_hide', n_clicks = 0)
@@ -175,7 +175,7 @@ maindiv = html.Div(
                     html.Div(id = 'selected_image')
                 ], width=4),
             )
-        )
+        ])
     ],
     style = CONTENT_STYLE
 )
