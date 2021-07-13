@@ -363,8 +363,7 @@ def map_click(click_lat_lng):
     [
         State("liveview_label_modal", "is_open"),
         State("liveview_label_datetime", "value"),
-        State({'type':'select_button','index': ALL}, 'id'),
-        State("map", "click_lat_lng")
+        State({'type':'select_button','index': ALL}, 'id')
     ]
 )
 def show_modal(
@@ -376,7 +375,6 @@ def show_modal(
     is_open : bool,
     dt: str,
     entry_id,
-    click_lat_lng
 ):
     """Show modal for adding a label."""
     dt = datetime.datetime.now().strftime("%Y-%m-%d %H:%M:%S")
