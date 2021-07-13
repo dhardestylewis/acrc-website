@@ -118,8 +118,7 @@ CONTENT_STYLE = {
     'margin' : '15px',
     "padding" : "2rem 1rem",
     "display" : "inline-block",
-    'border' : '1px solid blue',
-    'overflow' : 'scroll'
+    'border' : '1px solid blue'
 }
 
 sidebar = html.Div(
@@ -131,7 +130,10 @@ sidebar = html.Div(
             "A simple sidebar", className="lead"
         ),
         html.Div(
-            build_gallery(df10)
+            build_gallery(df10),
+            style = {
+                'overflow' : 'scroll'
+            }
         )
     ],
     style = SIDEBAR_STYLE
