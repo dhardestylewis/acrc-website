@@ -124,26 +124,32 @@ CONTENT_STYLE = {
 
 sidebar = html.Div(
     [
-        html.H2("Sites & stories", className="display-4"),
-#        html.Hr(),
-#        html.Div('Testy!', id='testy'),
-#        html.P(
-#            "A simple sidebar", className="lead"
-#        ),
-        html.Div(
-            build_gallery(df10),
-            style = {
-                'position' : 'fixed',
-                'top' : 0,
-                'left' : 0,
-                'bottom' : 0,
-                'height' : '85%',
-                'width' : '16rem',
-                'padding' : '2rem 1rem',
-                'overflow' : 'scroll',
-                'overflowY' : 'scroll'
-            }
-        )
+        dbc.Col([
+            dbc.Row(
+                html.H2("Sites & stories", className="display-4"),
+        #        html.Hr(),
+        #        html.Div('Testy!', id='testy'),
+        #        html.P(
+        #            "A simple sidebar", className="lead"
+        #        ),
+            ),
+            dbc.Row(
+                html.Div(
+                    build_gallery(df10),
+                    style = {
+                        'position' : 'fixed',
+                        'top' : 0,
+                        'left' : 0,
+                        'bottom' : 0,
+                        'height' : '85%',
+                        'width' : '16rem',
+                        'padding' : '2rem 1rem',
+                        'overflow' : 'scroll',
+                        'overflowY' : 'scroll'
+                    }
+                )
+            )
+        ])
     ],
     style = SIDEBAR_STYLE
 )
