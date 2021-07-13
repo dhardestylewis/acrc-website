@@ -311,7 +311,7 @@ def show_box(hide_n_clicks, image_n_clicks):
         State('selected_image_id','children')
     ]
 )
-def show_box(n_clicks, entry_id):
+def show_box(n_clicks, entry_id, image_id):
     # get index of clicked image
     triggered = dash.callback_context.triggered[0]['prop_id'].replace('.n_clicks','')
     image_id = triggered.copy()
@@ -376,10 +376,10 @@ def show_modal(
     n_ok : int,
     n_cancel : int,
     n_clicks,
-    image_id,
     click_lat_lng,
     is_open : bool,
     dt: str,
+    image_id,
 ):
     """Show modal for adding a label."""
     dt = datetime.now().strftime("%Y-%m-%d %H:%M:%S")
