@@ -363,7 +363,7 @@ def map_click(click_lat_lng):
     [
         State("liveview_label_modal", "is_open"),
         State("liveview_label_datetime", "value"),
-        State({'type':'select_button','index': ALL}, 'n_clicks'),
+        State({'type':'select_button','index': ALL}, 'id'),
         State("map", "click_lat_lng")
     ]
 )
@@ -371,11 +371,11 @@ def show_modal(
     n_add : int,
     n_ok : int,
     n_cancel : int,
-    (n_clicks, entry_id),
+    n_clicks,
     click_lat_lng,
     is_open : bool,
     dt: str,
-    (n_clicks, entry_id),
+    entry_id,
     click_lat_lng
 ):
     """Show modal for adding a label."""
