@@ -250,6 +250,12 @@ popup = dbc.Modal(
         dbc.ModalHeader("Input form"),
         dbc.ModalBody(
             [
+                dbc.Label("Timestamp:"),
+                dbc.Input(
+                    id = "liveview_label_datetime",
+                    type = "text",
+                    disable = True
+                )
                 dbc.Label("Image ID:"),
                 dbc.Input(
                     id = "liveview_label_image",
@@ -379,7 +385,7 @@ def show_modal(
         "liveview_label_name",
         "liveview_modal_ok_button"
     ]):
-        dt_local = datetime.datetime.strptime(dt "%Y-%m-%d %H:%M:%S").astimezone()
+        dt_local = datetime.datetime.strptime(dt, "%Y-%m-%d %H:%M:%S").astimezone()
         dt_utc = dt_local.astimezone(tz.UTC)
         db_client.create_label(
             dt_utc,
