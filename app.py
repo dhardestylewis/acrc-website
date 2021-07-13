@@ -115,7 +115,7 @@ SIDEBAR_STYLE = {
 CONTENT_STYLE = {
     "margin-left" : "18rem",
     "margin-right" : "2rem",
-    "autosize" : "True"
+    "autosize" : "True",
 #    'margin' : '15px',
     "padding" : "2rem 1rem",
     "display" : "inline-block",
