@@ -197,8 +197,9 @@ maindiv = html.Div(
                             style = {
                                 'width' : '43vw',
                                 'height' : '43vh'
+                            }
                         )
-                    ],
+                    ]#,
 #                    width = 4
                 )
             )
