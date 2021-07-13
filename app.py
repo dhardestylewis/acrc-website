@@ -115,10 +115,10 @@ SIDEBAR_STYLE = {
 CONTENT_STYLE = {
     "margin-left" : "18rem",
     "margin-right" : "2rem",
-    'margin' : '15px',
+#    'margin' : '15px',
     "padding" : "2rem 1rem",
     "display" : "inline-block",
-    'border' : '1px solid blue'
+#    'border' : '1px solid blue'
 }
 
 sidebar = html.Div(
