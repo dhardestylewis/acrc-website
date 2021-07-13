@@ -218,7 +218,7 @@ maindiv = html.Div(
                 ),
                 dbc.Col(
                     html.Img(
-                        src = os.path.join(ASSETS_PATH, 'Logo-PT2050.png'),
+                        src = app.get_asset_url('Logo-PT2050.png'),
                         style = {
                             'height' : '70px',
                             'width' : '15vw'
@@ -227,7 +227,7 @@ maindiv = html.Div(
                 ),
                 dbc.Col(
                     html.Img(
-                        src = os.path.join(ASSETS_PATH, 'Logo-Azure.png'),
+                        src = app.get_asset_url('Logo-Azure.png'),
                         style = {
                             'height' : '70px',
                             'width' : '15vw'
@@ -236,7 +236,7 @@ maindiv = html.Div(
                 ),
                 dbc.Col(
                     html.Img(
-                        src = os.path.join(ASSETS_PATH, 'Logo-NSF.png'),
+                        src = app.get_asset_url('Logo-NSF.png'),
                         style = {
                             'height' : '70px',
                             'width' : '15vw'
