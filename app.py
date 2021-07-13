@@ -245,7 +245,40 @@ maindiv = html.Div(
     style = CONTENT_STYLE
 )
 
-app.layout = html.Div([sidebar,maindiv])
+popup = dbc.Modal(
+    [
+        dbc.ModalHeader("Input form"),
+        dbc.ModalBody(
+            [
+                dbc.Label("Image ID:"),
+                dbc.Input(
+                    id = "liveview_label_image",
+                    type = "text",
+                    disabled = True
+                ),
+                dbc.Label("Coordinates:"),
+                dbc.Input(
+                    id = "liveview_label_coordinates",
+                    type = "text",
+                    disabled = True
+                )
+            ]
+        ),
+        dbc.ModalFooter(
+            [
+                dbc.Button(
+                    "Submit",
+                    color = "primary",
+                    id = "liveview_modal_ok_button"
+                ),
+                dbc.Button("Cancel", id="liveview_modal_cancel_button")
+            ]
+        )
+    ],
+    id = "liveview_label_modal"
+)
+
+app.layout = html.Div([sidebar,maindiv,popup])
 
 # ----------------------------------------------------------------------------
 # DATA CALLBACKS
@@ -285,7 +318,6 @@ def show_box(n_clicks, entry_id):
     )
     return kids #"{}".format(image_url)
 
-
 @app.callback(
     [
         Output("layer", "children"),
@@ -307,6 +339,55 @@ def map_click(click_lat_lng):
         ]
         message = 'You have selected a point at {:.3f}, {:.3f}'.format(*click_lat_lng)
         return new_layer_children, message
+
+@app.callback(
+    [
+        Output("liveview_label_modal", "is_open"),
+        Output("liveview_label_datetime", "value"),
+        Output("liveview_label_image", "value"),
+        Output("liveview_label_coordinates", "value")
+    ],
+    [
+        Input("liveview_add_label_button", "n_clicks"),
+        Input("liveview_modal_ok_button", "n_clicks"),
+        Input("liveview_modal_cancel_button", "n_clicks"),
+        Input({'type':'select_button','index': ALL}, 'n_clicks'),
+        Input("map", "click_lat_lng")
+    ],
+    [
+        State("liveview_label_modal", "is_open"),
+        State("liveview_label_datetime" "value"),
+        State("liveview_label_image", "value"),
+        State("liveview_label_coordinates", "value")
+    ]
+)
+def show_modal(
+    n_add : int,
+    n_ok : int,
+    n_cancel : int,
+    n_clicks,
+    entry_id,
+    is_open : bool,
+    click_lat_lng,
+    dt: str
+) -> Tuple[bool, str]:
+    """Show modal for adding a label."""
+    dt = datetime.datetime.now().strftime("%Y-%m-%d %H:%M:%S")
+    if callback_triggered_by(["liveview_add_label_button"]):
+        return True, dt, entry_id, click_lat_lng
+    if callback_triggered_by([
+        "liveview_label_name",
+        "liveview_modal_ok_button"
+    ]):
+        dt_local = datetime.datetime.strptime(dt "%Y-%m-%d %H:%M:%S").astimezone()
+        dt_utc = dt_local.astimezone(tz.UTC)
+        db_client.create_label(
+            dt_utc,
+            entry_id,
+            redis_client.get(REDIS_RECORDING.key)
+        )
+        return False, dt, entry_id, click_lat_lng
+    return False, dt, entry_id, click_lat_lng
 
 # ----------------------------------------------------------------------------
 # RUN APPLICATION
