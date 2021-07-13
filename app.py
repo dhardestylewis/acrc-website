@@ -254,7 +254,7 @@ popup = dbc.Modal(
                 dbc.Input(
                     id = "liveview_label_datetime",
                     type = "text",
-                    disable = True
+                    disabled = True
                 ),
                 dbc.Label("Image ID:"),
                 dbc.Input(
