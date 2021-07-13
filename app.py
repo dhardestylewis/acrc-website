@@ -166,14 +166,14 @@ maindiv = html.Div(
                             zoom = 8,
                             id = "map",
                             style = {
-                                'width' : '85%',
+#                                'width' : '85%',
                                 'height' : '50vh',
                                 'margin' : "auto",
                                 "display" : "block"
                             }
                         ),
                         html.Div(id='map_location')
-                    ],
+                    ]#,
 #                    width='85%'
                 ),
                 id = 'data_entry'
