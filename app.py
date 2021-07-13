@@ -123,12 +123,12 @@ CONTENT_STYLE = {
 
 sidebar = html.Div(
     [
-        html.H2("Sidebar", className="display-4"),
-        html.Hr(),
+#        html.H2("Sidebar", className="display-4"),
+#        html.Hr(),
 #        html.Div('Testy!', id='testy'),
-        html.P(
-            "A simple sidebar", className="lead"
-        ),
+#        html.P(
+#            "A simple sidebar", className="lead"
+#        ),
         html.Div(
             build_gallery(df10),
             style = {
@@ -165,14 +165,14 @@ maindiv = html.Div(
                         zoom = 8,
                         id = "map",
                         style = {
-                            'width' : '100%',
+                            'width' : '85%',
                             'height' : '50vh',
                             'margin' : "auto",
                             "display" : "block"
                         }
                     ),
                     html.Div(id='map_location')
-                ], width=8),
+                ], width='85%'),
                 id = 'data_entry'
             ),
             dbc.Row(
