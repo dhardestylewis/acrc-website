@@ -54,7 +54,8 @@ image_search = df.set_index('Entry_ID')
 # ----------------------------------------------------------------------------
 # Create Gallery of Cards
 # ----------------------------------------------------------------------------
-df10 = images.head(10)
+#df10 = images.head(10)
+df10 = images
 def build_gallery(df):
     # gallery = [html.P(Title) for Title in df['Details']]
     image_list = [
@@ -124,12 +125,13 @@ sidebar = html.Div(
     [
         html.H2("Sidebar", className="display-4"),
         html.Hr(),
-        html.Div('Testy!', id='testy'),
+#        html.Div('Testy!', id='testy'),
         html.P(
             "A simple sidebar", className="lead"
         ),
         html.Div(
-            build_gallery(df10)
+            build_gallery(df10),
+            overflow = 'scroll'
         )
     ],
     style = SIDEBAR_STYLE
@@ -137,13 +139,17 @@ sidebar = html.Div(
 
 maindiv = html.Div(
 #    id = "first-div",
-   id = 'data-entry=form',
+    id = 'data-entry=form',
     children = [
-        dbc.Row(
-            html.Button('Button in form', id='btn_hide', n_clicks = 0)
+        html.Div(
+            dbc.Row(
+                dbc.Col(
+                    html.Button('Button in form', id='btn_hide', n_clicks = 0)
+                )
+            )
         ),
-        dbc.Row(
-            [
+        html.Div(
+            dbc.Row(
                 dbc.Col([
                     dl.Map(
                         [dl.TileLayer(), dl.LayerGroup(id="layer")],
@@ -158,17 +164,23 @@ maindiv = html.Div(
                         }
                     ),
                     html.Div(id='map_location')
-                ], width=8)
-            ],
-            id = 'data_entry'
+                ], width=8),
+                id = 'data_entry'
+            )
         ),
-        dbc.Row(
-            html.Button('TOBE: Submit Form', id='btn_submit', n_clicks = 0)
+        html.Div(
+            dbc.Row(
+                dbc.Col(
+                    html.Button('TOBE: Submit Form', id='btn_submit', n_clicks = 0)
+                )
+            )
         ),
-        dbc.Row(
-            dbc.Col([
-                html.Div(id = 'selected_image')
-            ], width=4),
+        html.Div(
+            dbc.Row(
+                dbc.Col([
+                    html.Div(id = 'selected_image')
+                ], width=4),
+            )
         )
     ],
     style = CONTENT_STYLE
