@@ -146,7 +146,7 @@ maindiv = html.Div(
                 dbc.Col(
                     html.Button('Button in form', id='btn_hide', n_clicks = 0)
                 )
-            )
+            ),
             dbc.Row(
                 dbc.Col([
                     dl.Map(
@@ -164,12 +164,12 @@ maindiv = html.Div(
                     html.Div(id='map_location')
                 ], width=8),
                 id = 'data_entry'
-            )
+            ),
             dbc.Row(
                 dbc.Col(
                     html.Button('TOBE: Submit Form', id='btn_submit', n_clicks = 0)
                 )
-            )
+            ),
             dbc.Row(
                 dbc.Col([
                     html.Div(id = 'selected_image')
