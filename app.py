@@ -388,11 +388,12 @@ def show_modal(
     ):
         dt_local = datetime.strptime(dt, "%Y-%m-%d %H:%M:%S").astimezone()
         dt_utc = dt_local.astimezone(tz.UTC)
-        db_client.create_label(
-            dt_utc,
-            entry_id,
-            redis_client.get(REDIS_RECORDING.key)
-        )
+#        db_client.create_label(
+#            dt_utc,
+#            entry_id,
+#            click_lat_lng,
+#            redis_client.get(REDIS_RECORDING.key)
+#        )
         return False, dt, entry_id, click_lat_lng
     return False, dt, entry_id, click_lat_lng
 
