@@ -304,7 +304,10 @@ def show_box(hide_n_clicks, image_n_clicks):
         return 'Show the Input Form'
 
 @app.callback(
-    Output('selected_image','children'),
+    [
+        Output('selected_image','children'),
+        Output("liveview_label_image", "value")
+    ],
     Input({'type':'select_button','index': ALL}, 'n_clicks'),
     State({'type':'select_button','index': ALL}, 'id'),
 )
@@ -323,7 +326,7 @@ def show_box(n_clicks, entry_id):
             }
         )
     )
-    return kids #"{}".format(image_url)
+    return kids, entry_id #"{}".format(image_url)
 
 @app.callback(
     [
@@ -364,7 +367,7 @@ def map_click(click_lat_lng):
     [
         State("liveview_label_modal", "is_open"),
         State("liveview_label_datetime", "value"),
-        State({'type':'select_button','index': ALL}, 'id')
+        State("liveview_label_image", "value")
     ]
 )
 def show_modal(
