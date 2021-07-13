@@ -192,10 +192,14 @@ maindiv = html.Div(
             dbc.Row(
                 dbc.Col(
                     [
-                        html.Div(id = 'selected_image')
+                        html.Div(
+                            id = 'selected_image',
+                            style = {
+                                'width' : '43vw',
+                                'height' : '43vh'
+                        )
                     ],
 #                    width = 4
-                    width = '43vw'
                 )
             )
         ])
