@@ -143,7 +143,7 @@ sidebar = html.Div(
                         'bottom' : 0,
                         'height' : '85%',
                         'width' : '16rem',
-                        'padding' : '2rem 1rem',
+                        'padding' : '4rem 1rem',
                         'overflow' : 'scroll',
                         'overflowY' : 'scroll'
                     }
