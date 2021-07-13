@@ -306,14 +306,15 @@ def show_box(hide_n_clicks, image_n_clicks):
 @app.callback(
     [
         Output('selected_image','children'),
-        Output("index", "entry_id")
-    ],
+        Output('selected_image_id','children')
+    ]
     Input({'type':'select_button','index': ALL}, 'n_clicks'),
     State({'type':'select_button','index': ALL}, 'id'),
 )
 def show_box(n_clicks, entry_id):
     # get index of clicked image
     triggered = dash.callback_context.triggered[0]['prop_id'].replace('.n_clicks','')
+    image_id = triggered.copy()
     trigger = json.loads(triggered)
     trigger_index = trigger['index']
     # get image url from image
@@ -326,7 +327,7 @@ def show_box(n_clicks, entry_id):
             }
         )
     )
-    return kids, entry_id #"{}".format(image_url)
+    return kids, image_id #"{}".format(image_url)
 
 @app.callback(
     [
@@ -362,7 +363,7 @@ def map_click(click_lat_lng):
         Input("liveview_modal_ok_button", "n_clicks"),
         Input("liveview_modal_cancel_button", "n_clicks"),
         Input({'type':'select_button','index': ALL}, 'n_clicks'),
-        Input("index", "entry_id"),
+        Input("selected_image_id", "children"),
         Input("map", "click_lat_lng")
     ],
     [
@@ -375,7 +376,7 @@ def show_modal(
     n_ok : int,
     n_cancel : int,
     n_clicks,
-    entry_id,
+    image_id,
     click_lat_lng,
     is_open : bool,
     dt: str,
