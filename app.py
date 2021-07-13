@@ -367,8 +367,8 @@ def map_click(click_lat_lng):
     ],
     [
         State("liveview_label_modal", "is_open"),
-        State("liveview_label_datetime", "value")
-        State("selected_image_id", "children"),
+        State("liveview_label_datetime", "value"),
+        State("selected_image_id", "children")
     ]
 )
 def show_modal(
