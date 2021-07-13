@@ -363,12 +363,12 @@ def map_click(click_lat_lng):
         Input("liveview_modal_ok_button", "n_clicks"),
         Input("liveview_modal_cancel_button", "n_clicks"),
         Input({'type':'select_button','index': ALL}, 'n_clicks'),
-        Input("selected_image_id", "children"),
         Input("map", "click_lat_lng")
     ],
     [
         State("liveview_label_modal", "is_open"),
         State("liveview_label_datetime", "value")
+        State("selected_image_id", "children"),
     ]
 )
 def show_modal(
