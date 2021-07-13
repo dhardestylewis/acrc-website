@@ -196,8 +196,8 @@ maindiv = html.Div(
                     ],
 #                    width = 4
                     width = '43vw',
-                    height = '43vh'
-                )
+                ),
+                height = '43vh'
             )
         ])
     ],
