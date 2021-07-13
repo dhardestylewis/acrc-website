@@ -376,7 +376,7 @@ def show_modal(
     is_open : bool,
     click_lat_lng,
     dt: str
-) -> Tuple[bool, str]:
+):
     """Show modal for adding a label."""
     dt = datetime.datetime.now().strftime("%Y-%m-%d %H:%M:%S")
     if callback_triggered_by(["liveview_add_label_button"]):
