@@ -306,7 +306,7 @@ def show_box(hide_n_clicks, image_n_clicks):
 @app.callback(
     [
         Output('selected_image','children'),
-        Output("id", "value")
+        Output("index", "entry_id")
     ],
     Input({'type':'select_button','index': ALL}, 'n_clicks'),
     State({'type':'select_button','index': ALL}, 'id'),
@@ -362,7 +362,7 @@ def map_click(click_lat_lng):
         Input("liveview_modal_ok_button", "n_clicks"),
         Input("liveview_modal_cancel_button", "n_clicks"),
         Input({'type':'select_button','index': ALL}, 'n_clicks'),
-        Input("id", "value"),
+        Input("index", "entry_id"),
         Input("map", "click_lat_lng")
     ],
     [
