@@ -180,13 +180,20 @@ maindiv = html.Div(
             ),
             dbc.Row(
                 dbc.Col(
-                    html.Button('TOBE: Submit Form', id='btn_submit', n_clicks = 0)
+                    html.Button(
+                        'TOBE: Submit Form',
+                        id = 'btn_submit',
+                        n_clicks = 0
+                    )
                 )
             ),
             dbc.Row(
-                dbc.Col([
-                    html.Div(id = 'selected_image')
-                ], width=4),
+                dbc.Col(
+                    [
+                        html.Div(id = 'selected_image')
+                    ]#,
+#                    width = 4
+                )
             )
         ])
     ],
