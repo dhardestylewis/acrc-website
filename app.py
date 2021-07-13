@@ -307,7 +307,7 @@ def show_box(hide_n_clicks, image_n_clicks):
     [
         Output('selected_image','children'),
         Output('selected_image_id','children')
-    ]
+    ],
     Input({'type':'select_button','index': ALL}, 'n_clicks'),
     State({'type':'select_button','index': ALL}, 'id'),
 )
