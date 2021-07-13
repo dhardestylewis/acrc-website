@@ -158,21 +158,24 @@ maindiv = html.Div(
                 )
             ),
             dbc.Row(
-                dbc.Col([
-                    dl.Map(
-                        [dl.TileLayer(), dl.LayerGroup(id="layer")],
-                        center = [26.903, -98.158],
-                        zoom = 8,
-                        id = "map",
-                        style = {
-                            'width' : '85%',
-                            'height' : '50vh',
-                            'margin' : "auto",
-                            "display" : "block"
-                        }
-                    ),
-                    html.Div(id='map_location')
-                ], width='85%'),
+                dbc.Col(
+                    [
+                        dl.Map(
+                            [dl.TileLayer(), dl.LayerGroup(id="layer")],
+                            center = [26.903, -98.158],
+                            zoom = 8,
+                            id = "map",
+                            style = {
+                                'width' : '85%',
+                                'height' : '50vh',
+                                'margin' : "auto",
+                                "display" : "block"
+                            }
+                        ),
+                        html.Div(id='map_location')
+                    ],
+#                    width='85%'
+                ),
                 id = 'data_entry'
             ),
             dbc.Row(
