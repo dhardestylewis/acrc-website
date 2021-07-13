@@ -377,14 +377,14 @@ def show_modal(
     entry_id,
 ):
     """Show modal for adding a label."""
-    dt = datetime.datetime.now().strftime("%Y-%m-%d %H:%M:%S")
+    dt = datetime.now().strftime("%Y-%m-%d %H:%M:%S")
     if callback_triggered_by(["btn_submit"]):
         return True, dt, entry_id, click_lat_lng
     if callback_triggered_by([
         "liveview_label_name",
         "liveview_modal_ok_button"
     ]):
-        dt_local = datetime.datetime.strptime(dt, "%Y-%m-%d %H:%M:%S").astimezone()
+        dt_local = datetime.strptime(dt, "%Y-%m-%d %H:%M:%S").astimezone()
         dt_utc = dt_local.astimezone(tz.UTC)
         db_client.create_label(
             dt_utc,
