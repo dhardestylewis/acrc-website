@@ -237,7 +237,7 @@ def show_box(n_clicks, entry_id):
         html.Img(
             src = image_url,
             style = {
-                'width' : '43vw',
+                'width' : '60vw',
                 'height' : '43vh'
             }
         )
