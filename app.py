@@ -168,7 +168,8 @@ maindiv = html.Div(
                             id = "map",
                             style = {
 #                                'width' : '85%',
-                                'height' : '50vh',
+                                'width' : '43vw',
+                                'height' : '43vh',
                                 'margin' : "auto",
                                 "display" : "block"
                             }
@@ -192,8 +193,10 @@ maindiv = html.Div(
                 dbc.Col(
                     [
                         html.Div(id = 'selected_image')
-                    ]#,
+                    ],
 #                    width = 4
+                    width = '43vw',
+                    height = '43vh'
                 )
             )
         ])
