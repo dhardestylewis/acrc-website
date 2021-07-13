@@ -354,7 +354,7 @@ def map_click(click_lat_lng):
         Output("liveview_label_coordinates", "value")
     ],
     [
-        Input("liveview_add_label_button", "n_clicks"),
+        Input("btn_submit", "n_clicks"),
         Input("liveview_modal_ok_button", "n_clicks"),
         Input("liveview_modal_cancel_button", "n_clicks"),
         Input({'type':'select_button','index': ALL}, 'n_clicks'),
@@ -379,7 +379,7 @@ def show_modal(
 ):
     """Show modal for adding a label."""
     dt = datetime.datetime.now().strftime("%Y-%m-%d %H:%M:%S")
-    if callback_triggered_by(["liveview_add_label_button"]):
+    if callback_triggered_by(["btn_submit"]):
         return True, dt, entry_id, click_lat_lng
     if callback_triggered_by([
         "liveview_label_name",
