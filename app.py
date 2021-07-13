@@ -304,12 +304,12 @@ def show_box(hide_n_clicks, image_n_clicks):
         return 'Show the Input Form'
 
 @app.callback(
-    [
-        Output('selected_image','children'),
-        Output('selected_image_id','children')
-    ],
+    Output('selected_image','children'),
     Input({'type':'select_button','index': ALL}, 'n_clicks'),
-    State({'type':'select_button','index': ALL}, 'id'),
+    [
+        State({'type':'select_button','index': ALL}, 'id'),
+        State('selected_image_id','children')
+    ]
 )
 def show_box(n_clicks, entry_id):
     # get index of clicked image
