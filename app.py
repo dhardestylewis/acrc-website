@@ -258,13 +258,13 @@ popup = dbc.Modal(
                 ),
                 dbc.Label("Image ID:"),
                 dbc.Input(
-                    id = "liveview_label_image",
+                    id = "entry_id",
                     type = "text",
                     disabled = True
                 ),
                 dbc.Label("Coordinates:"),
                 dbc.Input(
-                    id = "liveview_label_coordinates",
+                    id = "click_lat_lng",
                     type = "text",
                     disabled = True
                 )
