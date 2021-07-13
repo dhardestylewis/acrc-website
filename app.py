@@ -204,7 +204,47 @@ maindiv = html.Div(
                     ]
                 )
             )
-        ])
+        ]),
+        html.Footer(
+            dbc.Row([
+                dbc.Col(
+                    html.Img(
+                        src = os.path.join(ASSETS_PATH, 'Logo-MOSTH.png'),
+                        style = {
+                            'height' : '70px',
+                            'width' : '15vw'
+                        }
+                    )
+                ),
+                dbc.Col(
+                    html.Img(
+                        src = os.path.join(ASSETS_PATH, 'Logo-PT2050.png'),
+                        style = {
+                            'height' : '70px',
+                            'width' : '15vw'
+                        }
+                    )
+                ),
+                dbc.Col(
+                    html.Img(
+                        src = os.path.join(ASSETS_PATH, 'Logo-Azure.png'),
+                        style = {
+                            'height' : '70px',
+                            'width' : '15vw'
+                        }
+                    )
+                ),
+                dbc.Col(
+                    html.Img(
+                        src = os.path.join(ASSETS_PATH, 'Logo-NSF.png'),
+                        style = {
+                            'height' : '70px',
+                            'width' : '15vw'
+                        }
+                    )
+                )
+            ])
+        )
     ],
     style = CONTENT_STYLE
 )
