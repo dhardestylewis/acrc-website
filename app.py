@@ -118,7 +118,8 @@ CONTENT_STYLE = {
     'margin' : '15px',
     "padding" : "2rem 1rem",
     "display" : "inline-block",
-    'border' : '1px solid blue'
+    'border' : '1px solid blue',
+    'overflow' : 'scroll'
 }
 
 sidebar = html.Div(
@@ -130,8 +131,7 @@ sidebar = html.Div(
             "A simple sidebar", className="lead"
         ),
         html.Div(
-            build_gallery(df10),
-            overflow = 'scroll'
+            build_gallery(df10)
         )
     ],
     style = SIDEBAR_STYLE
@@ -147,8 +147,6 @@ maindiv = html.Div(
                     html.Button('Button in form', id='btn_hide', n_clicks = 0)
                 )
             )
-        ),
-        html.Div(
             dbc.Row(
                 dbc.Col([
                     dl.Map(
@@ -167,15 +165,11 @@ maindiv = html.Div(
                 ], width=8),
                 id = 'data_entry'
             )
-        ),
-        html.Div(
             dbc.Row(
                 dbc.Col(
                     html.Button('TOBE: Submit Form', id='btn_submit', n_clicks = 0)
                 )
             )
-        ),
-        html.Div(
             dbc.Row(
                 dbc.Col([
                     html.Div(id = 'selected_image')
