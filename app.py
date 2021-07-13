@@ -209,7 +209,7 @@ maindiv = html.Div(
             dbc.Row([
                 dbc.Col(
                     html.Img(
-                        src = app.get_asset_url(os.path.join(ASSETS_PATH, 'Logo-MOSTH.png')),
+                        src = app.get_asset_url(os.path.join('assets', 'Logo-MOSTH.png')),
                         style = {
                             'height' : '70px',
                             'width' : '15vw'
