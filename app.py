@@ -168,7 +168,7 @@ maindiv = html.Div(
                             id = "map",
                             style = {
 #                                'width' : '85%',
-                                'width' : '43vw',
+                                'width' : '60vw',
                                 'height' : '43vh',
                                 'margin' : "auto",
                                 "display" : "block"
@@ -193,14 +193,9 @@ maindiv = html.Div(
                 dbc.Col(
                     [
                         html.Div(
-                            id = 'selected_image',
-                            style = {
-                                'width' : '43vw',
-                                'height' : '43vh'
-                            }
+                            id = 'selected_image'
                         )
-                    ]#,
-#                    width = 4
+                    ]
                 )
             )
         ])
@@ -238,7 +233,13 @@ def show_box(n_clicks, entry_id):
     trigger_index = trigger['index']
     # get image url from image
     image_url = image_search.at[trigger_index,'Image_url']
-    kids = html.Div(html.Img(src=image_url))
+    kids = html.Div(
+        html.Img(src=image_url),
+        style = {
+            'width' : '43vw',
+            'height' : '43vh'
+        }
+    )
     return kids #"{}".format(image_url)
 
 
