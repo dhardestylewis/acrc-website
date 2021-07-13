@@ -195,9 +195,8 @@ maindiv = html.Div(
                         html.Div(id = 'selected_image')
                     ],
 #                    width = 4
-                    width = '43vw',
-                ),
-                height = '43vh'
+                    width = '43vw'
+                )
             )
         ])
     ],
