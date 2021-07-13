@@ -234,11 +234,13 @@ def show_box(n_clicks, entry_id):
     # get image url from image
     image_url = image_search.at[trigger_index,'Image_url']
     kids = html.Div(
-        html.Img(src=image_url),
-        style = {
-            'width' : '43vw',
-            'height' : '43vh'
-        }
+        html.Img(
+            src = image_url,
+            style = {
+                'width' : '43vw',
+                'height' : '43vh'
+            }
+        )
     )
     return kids #"{}".format(image_url)
 
