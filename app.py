@@ -138,7 +138,7 @@ sidebar = html.Div(
                     build_gallery(df10),
                     style = {
                         'position' : 'fixed',
-                        'top' : 0,
+#                        'top' : 0,
                         'left' : 0,
                         'bottom' : 0,
                         'height' : '85%',
