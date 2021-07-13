@@ -259,13 +259,13 @@ popup = dbc.Modal(
                 ),
                 dbc.Label("Image ID:"),
                 dbc.Input(
-                    id = "entry_id",
+                    id = "liveview_label_image",
                     type = "text",
                     disabled = True
                 ),
                 dbc.Label("Coordinates:"),
                 dbc.Input(
-                    id = "click_lat_lng",
+                    id = "liveview_label_coordinates",
                     type = "text",
                     disabled = True
                 )
@@ -351,8 +351,8 @@ def map_click(click_lat_lng):
     [
         Output("liveview_label_modal", "is_open"),
         Output("liveview_label_datetime", "value"),
-        Output({'type':'select_button','index': ALL}, 'n_clicks'),
-        Output("map", "click_lat_lng")
+        Output("liveview_label_image", "value"),
+        Output("liveview_label_coordinates", "value")
     ],
     [
         Input("btn_submit", "n_clicks"),
