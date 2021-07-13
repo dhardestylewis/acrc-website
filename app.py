@@ -211,8 +211,7 @@ maindiv = html.Div(
                     html.Img(
                         src = app.get_asset_url('Logo-MOSTH.png'),
                         style = {
-                            'height' : '70px',
-                            'width' : '15vw'
+                            'height' : '70px'
                         }
                     )
                 ),
@@ -220,8 +219,7 @@ maindiv = html.Div(
                     html.Img(
                         src = app.get_asset_url('Logo-PT2050.png'),
                         style = {
-                            'height' : '70px',
-                            'width' : '15vw'
+                            'height' : '70px'
                         }
                     )
                 ),
@@ -229,8 +227,7 @@ maindiv = html.Div(
                     html.Img(
                         src = app.get_asset_url('Logo-Azure.png'),
                         style = {
-                            'height' : '70px',
-                            'width' : '15vw'
+                            'height' : '70px'
                         }
                     )
                 ),
@@ -238,8 +235,7 @@ maindiv = html.Div(
                     html.Img(
                         src = app.get_asset_url('Logo-NSF.png'),
                         style = {
-                            'height' : '70px',
-                            'width' : '15vw'
+                            'height' : '70px'
                         }
                     )
                 )
