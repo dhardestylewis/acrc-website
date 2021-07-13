@@ -54,8 +54,8 @@ image_search = df.set_index('Entry_ID')
 # ----------------------------------------------------------------------------
 # Create Gallery of Cards
 # ----------------------------------------------------------------------------
-#df10 = images.head(10)
-df10 = images
+df10 = images.head(10)
+#df10 = images
 def build_gallery(df):
     # gallery = [html.P(Title) for Title in df['Details']]
     image_list = [
