@@ -362,7 +362,7 @@ def map_click(click_lat_lng):
     ],
     [
         State("liveview_label_modal", "is_open"),
-        State("liveview_label_datetime" "value"),
+        State("liveview_label_datetime", "value"),
         State("liveview_label_image", "value"),
         State("liveview_label_coordinates", "value")
     ]
