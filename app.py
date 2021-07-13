@@ -124,7 +124,7 @@ CONTENT_STYLE = {
 
 sidebar = html.Div(
     [
-#        html.H2("Sidebar", className="display-4"),
+        html.H2("Sites & stories", className="display-4"),
 #        html.Hr(),
 #        html.Div('Testy!', id='testy'),
 #        html.P(
@@ -237,8 +237,7 @@ def show_box(n_clicks, entry_id):
         html.Img(
             src = image_url,
             style = {
-                'width' : '60vw',
-                'height' : '43vh'
+                'width' : '60vw'
             }
         )
     )
