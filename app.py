@@ -334,7 +334,6 @@ popup_poster = dbc.Modal(
             html.Img(
                 src = app.get_asset_url('Poster.png'),
                 style = {
-                    'height' : '85vh',
                     'width' : '85vw'
                 }
             )
