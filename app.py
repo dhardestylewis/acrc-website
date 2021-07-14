@@ -303,27 +303,27 @@ def show_box(hide_n_clicks, image_n_clicks):
     else:
         return 'Show the Input Form'
 
-@app.callback(
-    Output('selected_image','children'),
-    Input({'type':'select_button','index': ALL}, 'n_clicks'),
-    State({'type':'select_button','index': ALL}, 'id')
-)
-def show_box(n_clicks, entry_id):
-    # get index of clicked image
-    triggered = dash.callback_context.triggered[0]['prop_id'].replace('.n_clicks','')
-    trigger = json.loads(triggered)
-    trigger_index = trigger['index']
-    # get image url from image
-    image_url = image_search.at[trigger_index,'Image_url']
-    kids = html.Div(
-        html.Img(
-            src = image_url,
-            style = {
-                'width' : '60vw'
-            }
-        )
-    )
-    return kids #"{}".format(image_url)
+#@app.callback(
+#    Output('selected_image','children'),
+#    Input({'type':'select_button','index': ALL}, 'n_clicks'),
+#    State({'type':'select_button','index': ALL}, 'id')
+#)
+#def show_box(n_clicks, entry_id):
+#    # get index of clicked image
+#    triggered = dash.callback_context.triggered[0]['prop_id'].replace('.n_clicks','')
+#    trigger = json.loads(triggered)
+#    trigger_index = trigger['index']
+#    # get image url from image
+#    image_url = image_search.at[trigger_index,'Image_url']
+#    kids = html.Div(
+#        html.Img(
+#            src = image_url,
+#            style = {
+#                'width' : '60vw'
+#            }
+#        )
+#    )
+#    return kids #"{}".format(image_url)
 
 @app.callback(
     Output('selected_image','children'),
