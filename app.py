@@ -162,11 +162,6 @@ maindiv = html.Div(
         html.Div([
             dbc.Row(
                 dbc.Col(
-                    html.Button('Button in form', id='btn_hide', n_clicks = 0)
-                )
-            ),
-            dbc.Row(
-                dbc.Col(
                     [
                         dl.Map(
                             [dl.TileLayer(), dl.LayerGroup(id="layer")],
@@ -190,7 +185,7 @@ maindiv = html.Div(
             dbc.Row(
                 dbc.Col(
                     html.Button(
-                        'TOBE: Submit Form',
+                        'Submit',
                         id = 'btn_submit',
                         n_clicks = 0
                     )
@@ -251,6 +246,15 @@ maindiv = html.Div(
                         html.Li("Navigating the New Arctic program (Award Number (FAIN): 2127353)")
                     ])
                 ])
+            ),
+            dbc.Row(
+                dbc.Col(
+                    html.Button(
+                        'Explanation of work',
+                        id = 'btn_poster',
+                        n_clicks = 0
+                    )
+                )
             )
         ])
     ],
@@ -296,7 +300,7 @@ popup = dbc.Modal(
     id = "liveview_label_modal"
 )
 
-initial_popup = dbc.Modal(
+popup_initial = dbc.Modal(
     [
         dbc.ModalHeader("Intro"),
         dbc.ModalBody(
@@ -314,7 +318,7 @@ initial_popup = dbc.Modal(
         ),
         dbc.ModalFooter(
             dbc.Button(
-                "Submit",
+                "OK",
                 color = "primary",
                 id = "liveview_modal_ok_button_initial"
             )
@@ -323,12 +327,36 @@ initial_popup = dbc.Modal(
     id = "liveview_label_modal_initial"
 )
 
+popup_poster = dbc.Modal(
+    [
+        dbc.ModalHeader("Poster"),
+        dbc.ModalBody(
+            html.Img(
+                src = app.get_asset_url('Poster.png'),
+                style = {
+                    'height' : '85vh',
+                    'width' : '85vw'
+                }
+            )
+        ),
+        dbc.ModalFooter(
+            dbc.Button(
+                "Close",
+                color = "primary",
+                id = "liveview_modal_close_button"
+            )
+        )
+    ],
+    id = "liveview_label_modal_poster"
+)
+
 app.layout = html.Div([
     dcc.Location(id='url',refresh=False),
     sidebar,
     maindiv,
-    initial_popup,
-    popup
+    popup_initial,
+    popup,
+    popup_poster
 ])
 
 # ----------------------------------------------------------------------------
@@ -456,11 +484,30 @@ def display_page(
 ):
     """Show modal for adding a label."""
     triggered = dash.callback_context.triggered[0]['prop_id'].replace('.n_clicks','')
-#    if triggered == "url":
-#        return True
     if triggered == "liveview_modal_ok_button_initial":
         return False
     return True
+
+@app.callback(
+    Output("liveview_label_modal_poster", "is_open"),
+    [
+        Input("btn_poster", "n_clicks"),
+        Input("liveview_modal_close_button", "n_clicks")
+    ],
+    State("liveview_label_modal_poster", "is_open")
+)
+def display_page(
+    n_add : int,
+    n_close : int,
+    is_open : bool,
+):
+    """Show modal for adding a label."""
+    triggered = dash.callback_context.triggered[0]['prop_id'].replace('.n_clicks','')
+    if triggered == "btn_poster":
+        return True
+    if triggered == "liveview_modal_close_button":
+        return False
+    return False
 
 # ----------------------------------------------------------------------------
 # RUN APPLICATION
