@@ -325,27 +325,27 @@ def show_box(n_clicks, entry_id):
     )
     return kids #"{}".format(image_url)
 
-@app.callback(
-    Output('selected_image','children'),
-    Input({'type':'image-card','index': ALL}, 'n_clicks'),
-    State({'type':'image-card','index': ALL}, 'id')
-)
-def show_box(n_clicks, entry_id):
-    # get index of clicked image
-    triggered = dash.callback_context.triggered[0]['prop_id'].replace('.n_clicks','')
-    trigger = json.loads(triggered)
-    trigger_index = trigger['index']
-    # get image url from image
-    image_url = image_search.at[trigger_index,'Image_url']
-    kids = html.Div(
-        html.Img(
-            src = image_url,
-            style = {
-                'width' : '60vw'
-            }
-        )
-    )
-    return kids #"{}".format(image_url)
+#@app.callback(
+#    Output('selected_image','children'),
+#    Input({'type':'image-card','index': ALL}, 'n_clicks'),
+#    State({'type':'image-card','index': ALL}, 'id')
+#)
+#def show_box(n_clicks, entry_id):
+#    # get index of clicked image
+#    triggered = dash.callback_context.triggered[0]['prop_id'].replace('.n_clicks','')
+#    trigger = json.loads(triggered)
+#    trigger_index = trigger['index']
+#    # get image url from image
+#    image_url = image_search.at[trigger_index,'Image_url']
+#    kids = html.Div(
+#        html.Img(
+#            src = image_url,
+#            style = {
+#                'width' : '60vw'
+#            }
+#        )
+#    )
+#    return kids #"{}".format(image_url)
 
 @app.callback(
     [
