@@ -127,7 +127,7 @@ sidebar = html.Div(
     [
         dbc.Col([
             dbc.Row(
-                html.H2("Sites & stories", className="display-4"),
+                html.H2("Sites & Stories", className="display-4"),
         #        html.Hr(),
         #        html.Div('Testy!', id='testy'),
         #        html.P(
@@ -285,7 +285,39 @@ popup = dbc.Modal(
     id = "liveview_label_modal"
 )
 
-app.layout = html.Div([sidebar,maindiv,popup])
+initial_popup = dbc.Modal(
+    [
+        dbc.ModalHeader("Intro"),
+        dbc.ModalBody(
+            [
+                html.P(
+                    "The Sites & Stories application allows users to select a photograph and connect it with where they think it’s located on a map. Additionally, people can add comments and describe what they know about the image or location."
+                ),
+                html.P(
+                    "By providing your data, information, and experiences with events in your region, you will contribute to an effort to make more informed decisions about how to respond to and prepare for disasters. The stories or comments you make on photographs will help improve tools we use to model where flooding may impact communities."
+                ),
+                html.P(
+                    "Data collected during the study will be stored, maintained, and made accessible within the Texas Disaster Information System (TDIS). TDIS will be an interactive web-based spatial data system to support disaster preparedness, response, recovery, and mitigation within communities and regions across the State of Texas. TDIS will comply with state and federal information and data security requirements and will provide powerful analytical and planning tools for local communities."
+                )
+            ]
+        ),
+        dbc.ModalFooter(
+            dbc.Button(
+                "Submit",
+                color = "primary",
+                id = "liveview_modal_ok_button_initial"
+            )
+        )
+    ],
+    id = "liveview_label_modal_initial"
+)
+
+app.layout = html.Div([
+    dcc.Location(id='url',refresh=False)
+    sidebar,
+    maindiv,
+    popup
+])
 
 # ----------------------------------------------------------------------------
 # DATA CALLBACKS
@@ -399,15 +431,15 @@ def show_modal(
     dt: str,
     entry_id
 ):
-    """Show modal for adding a label."""
+    """
+    Show modal for adding a label.
+    https://community.plotly.com/t/does-dash-support-a-input-form-popup/42482
+    """
     dt = datetime.now().strftime("%Y-%m-%d %H:%M:%S")
     triggered = dash.callback_context.triggered[0]['prop_id'].replace('.n_clicks','')
     if triggered == "btn_submit":
         return True, dt, entry_id, click_lat_lng
-    if (
-        triggered == "liveview_label_name" or
-        triggered == "liveview_modal_ok_button"
-    ):
+    if triggered == "liveview_modal_ok_button":
         dt_local = datetime.strptime(dt, "%Y-%m-%d %H:%M:%S").astimezone()
         dt_utc = dt_local.astimezone(tz.UTC)
 #        db_client.create_label(
@@ -418,6 +450,27 @@ def show_modal(
 #        )
         return False, dt, entry_id, click_lat_lng
     return False, dt, entry_id, click_lat_lng
+
+@app.callback(
+    Output("liveview_label_modal_initial", "is_open"),
+    [
+        Input("url", "pathname"),
+        Input("liveview_modal_ok_button_initial", "n_clicks")
+    ],
+    State("liveview_label_modal_initial", "is_open")
+)
+def display_page(
+    pathname,
+    n_ok : int,
+    is_open : bool,
+):
+    """Show modal for adding a label."""
+    triggered = dash.callback_context.triggered[0]['prop_id'].replace('.n_clicks','')
+    if triggered == "url":
+        return True
+    if triggered == "liveview_modal_ok_button_initial":
+        return False
+    return False
 
 # ----------------------------------------------------------------------------
 # RUN APPLICATION
