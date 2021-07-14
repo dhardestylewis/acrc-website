@@ -313,9 +313,10 @@ initial_popup = dbc.Modal(
 )
 
 app.layout = html.Div([
-    dcc.Location(id='url',refresh=False)
+    dcc.Location(id='url',refresh=False),
     sidebar,
     maindiv,
+    initial_popup,
     popup
 ])
 
