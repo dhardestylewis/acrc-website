@@ -206,7 +206,7 @@ maindiv = html.Div(
                 )
             )
         ]),
-        html.Footer(
+        html.Footer([
             dbc.Row([
                 dbc.Col(
                     html.Img(
@@ -240,8 +240,19 @@ maindiv = html.Div(
                         }
                     )
                 )
-            ])
-        )
+            ]),
+            dbc.Row(
+                dbc.Col([
+                    html.P("This work is a collaboration between the Museum of South Texas and the Planet Texas 2050 project with sponsorship from"),
+                    html.Ul(children = [
+                        html.Li("The National Science Foundation Smart & Connected Cities program (award number 1952196)"),
+                        html.Li("Microsoft Azure Intersectionality and Equity program"),
+                        html.Li("The Planet Texas project of the Bridging Barriers Program at The University of Texas at Austin"),
+                        html.Li("Navigating the New Arctic program (Award Number (FAIN): 2127353)")
+                    ])
+                ])
+            )
+        ])
     ],
     style = CONTENT_STYLE
 )
@@ -326,8 +337,10 @@ app.layout = html.Div([
 
 @app.callback(
     Output('testy','children'),
-    Input('btn_hide','n_clicks'),
-    Input({'type':'select_button','index': ALL}, 'n_clicks')
+    [
+        Input('btn_hide','n_clicks'),
+        Input({'type':'select_button','index': ALL}, 'n_clicks')
+    ]
 )
 def show_box(hide_n_clicks, image_n_clicks):
     triggered = dash.callback_context.triggered[0]['prop_id'].replace('.n_clicks','')
@@ -363,9 +376,7 @@ def show_box(n_clicks, entry_id):
         Output("layer", "children"),
         Output("map_location", "children")
     ],
-    [
-        Input("map", "click_lat_lng")
-    ]
+    Input("map", "click_lat_lng")
 )
 def map_click(click_lat_lng):
     if click_lat_lng is None:
