@@ -73,9 +73,7 @@ def build_gallery(df):
                     entry_id,
                     id = {'index' : entry_id, 'type' : 'select_button'},
                     n_clicks = 0
-                ),
-                id = {'index' : entry_id, 'type' : 'select_div'},
-                n_clicks = 0
+                )
             ],
             className = 'gallery-card',
             id = {'index' : entry_id, 'type' : 'image-card'},
@@ -329,8 +327,8 @@ def show_box(n_clicks, entry_id):
 
 @app.callback(
     Output('selected_image','children'),
-    Input({'type':'select_div','index': ALL}, 'n_clicks'),
-    State({'type':'select_div','index': ALL}, 'id')
+    Input({'type':'image-card','index': ALL}, 'n_clicks'),
+    State({'type':'image-card','index': ALL}, 'id')
 )
 def show_box(n_clicks, entry_id):
     # get index of clicked image
