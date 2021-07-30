@@ -433,10 +433,9 @@ def show_box(hide_n_clicks, image_n_clicks):
     State("liveview_label_modal_app", "is_open")
 )
 def display_page(
-    n_add : int,
-    n_clicks,
+    n_add: int,
     n_close : int,
-    is_open : bool,
+    is_open : bool
 ):
     """Show modal for adding a label."""
     triggered = dash.callback_context.triggered[0]['prop_id'].replace('.n_clicks','')
