@@ -439,7 +439,8 @@ def display_page(
 ):
     """Show modal for adding a label."""
     triggered = dash.callback_context.triggered[0]['prop_id'].replace('.n_clicks','')
-    try json.loads(triggered):
+    try:
+        json.loads(triggered):
         return True
     except:
         pass
