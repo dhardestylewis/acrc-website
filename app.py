@@ -235,7 +235,8 @@ maindiv = html.Div(
                                 'height' : '70px'
                             }
                         ),
-                        href = 'https://nsf.gov'
+                        href = 'https://nsf.gov',
+                        target = '_blank'
                     )
                 )
             ]),
