@@ -158,6 +158,7 @@ sidebar = html.Div(
 maindiv = html.Div(
     id = 'data-entry=form',
     children = [
+        popup_app,
         html.Footer([
             dbc.Row([
                 dbc.Col(
@@ -401,7 +402,6 @@ app.layout = html.Div([
     sidebar,
     maindiv,
     popup_initial,
-    popup_app,
     popup,
     popup_poster
 ])
