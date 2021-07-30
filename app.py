@@ -469,7 +469,7 @@ def show_box(
 ):
     # get index of clicked image
     triggered = dash.callback_context.triggered[0]['prop_id'].replace('.n_clicks','')
-    if triggered:
+    if triggered != '':
         trigger = json.loads(triggered)
         trigger_index = trigger['index']
         # get image url from image
