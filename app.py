@@ -204,27 +204,39 @@ maindiv = html.Div(
         html.Footer([
             dbc.Row([
                 dbc.Col(
-                    html.Img(
-                        src = app.get_asset_url('Logo-MOSTH.png'),
-                        style = {
-                            'height' : '70px'
-                        }
+                    dcc.Link(
+                        html.Img(
+                            src = app.get_asset_url('Logo-MOSTH.png'),
+                            style = {
+                                'height' : '70px'
+                            }
+                        ),
+                        href = 'https://mosthistory.org',
+                        target = '_blank'
                     )
                 ),
                 dbc.Col(
-                    html.Img(
-                        src = app.get_asset_url('Logo-PT2050.png'),
-                        style = {
-                            'height' : '70px'
-                        }
+                    dcc.Link(
+                        html.Img(
+                            src = app.get_asset_url('Logo-PT2050.png'),
+                            style = {
+                                'height' : '70px'
+                            }
+                        ),
+                        href = 'https://bridgingbarriers.utexas.edu/planet-texas-2050',
+                        target = '_blank'
                     )
                 ),
                 dbc.Col(
-                    html.Img(
-                        src = app.get_asset_url('Logo-Azure.png'),
-                        style = {
-                            'height' : '70px'
-                        }
+                    dcc.Link(
+                        html.Img(
+                            src = app.get_asset_url('Logo-Azure.png'),
+                            style = {
+                                'height' : '70px'
+                            }
+                        ),
+                        href = 'https://azure.microsoft.com',
+                        target = '_blank'
                     )
                 ),
                 dbc.Col(
