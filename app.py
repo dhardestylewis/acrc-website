@@ -464,11 +464,15 @@ def show_box(
     # get image url from image
     image_url = image_search.at[trigger_index,'Image_url']
     kids = html.Div(
-        html.Img(
-            src = image_url,
-            style = {
-                'width' : '60vw'
-            }
+        dcc.Link(
+            html.Img(
+                src = image_url,
+                style = {
+                    'width' : '60vw'
+                }
+            ),
+            href = image_url,
+            target = '_blank'
         )
     )
     return kids #"{}".format(image_url)
