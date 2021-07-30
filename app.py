@@ -346,15 +346,15 @@ popup_app = dbc.Modal(
                     ),
                     id = 'data_entry'
                 ),
-                dbc.Row(
-                    dbc.Col(
-                        html.Button(
-                            'Submit',
-                            id = 'btn_submit',
-                            n_clicks = 0
-                        )
-                    )
-                ),
+#                dbc.Row(
+#                    dbc.Col(
+#                        html.Button(
+#                            'Submit',
+#                            id = 'btn_submit',
+#                            n_clicks = 0
+#                        )
+#                    )
+#                ),
                 dbc.Row(
                     dbc.Col(
                         [
@@ -367,6 +367,11 @@ popup_app = dbc.Modal(
             ])
         ),
         dbc.ModalFooter(
+            dbc.Button(
+                "Submit",
+                color = "primary",
+                id = "btn_submit"
+            ),
             dbc.Button(
                 "Close",
                 color = "primary",
@@ -431,12 +436,14 @@ def show_box(hide_n_clicks, image_n_clicks):
     Output("liveview_label_modal_app", "is_open"),
     [
         Input({'type':'image-card','index': ALL}, 'n_clicks'),
+        Input("btn_submit", "n_clicks")
         Input("liveview_modal_close_button_app", "n_clicks")
     ],
     State("liveview_label_modal_app", "is_open")
 )
 def display_page(
     n_add: int,
+    n_ok : int,
     n_close : int,
     is_open : bool
 ):
