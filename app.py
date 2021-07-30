@@ -441,6 +441,8 @@ def display_page(
     triggered = dash.callback_context.triggered[0]['prop_id'].replace('.n_clicks','')
     try json.loads(triggered):
         return True
+    except:
+        pass
     if triggered == "liveview_modal_close_button_app":
         return False
     return False
