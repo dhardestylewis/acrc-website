@@ -438,7 +438,7 @@ def display_page(
     is_open : bool
 ):
     """Show modal for adding a label."""
-#    triggered = dash.callback_context.triggered[0]['prop_id'].replace('.n_clicks','')
+    triggered = dash.callback_context.triggered[0]['prop_id'].replace('.n_clicks','')
 #    try json.loads(triggered):
 #        return True
     if triggered == "liveview_modal_close_button_app":
