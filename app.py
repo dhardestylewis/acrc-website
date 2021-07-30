@@ -424,68 +424,51 @@ def show_box(hide_n_clicks, image_n_clicks):
     else:
         return 'Show the Input Form'
 
-#@app.callback(
-#    Output("liveview_label_modal_app", "is_open"),
-#    [
-#        Input("btn_poster", "n_clicks"),
-#        Input("liveview_modal_close_button_app", "n_clicks")
-#    ],
-#    State("liveview_label_modal_app", "is_open")
-#)
-#def display_page(
-#    n_add : int,
-#    n_close : int,
-#    is_open : bool,
-#):
-#    """Show modal for adding a label."""
-#    triggered = dash.callback_context.triggered[0]['prop_id'].replace('.n_clicks','')
-#    if triggered == "btn_poster":
-#        return True
-#    if triggered == "liveview_modal_close_button_app":
-#        return False
-#    return False
-
 @app.callback(
+    Output("liveview_label_modal_app", "is_open"),
     [
-        Output('selected_image','children'),
-        Output("liveview_label_modal_app", "is_open")
+        Input({'type':'image-card','index': ALL}, 'n_clicks'),
+        Input("liveview_modal_close_button_app", "n_clicks")
     ],
-    [
-        Input("btn_poster", "n_clicks"),
-        Input("liveview_modal_close_button_app", "n_clicks"),
-        Input({'type':'image-card','index': ALL}, 'n_clicks')
-    ],
-    [
-        State("liveview_label_modal_app", "is_open"),
-        State({'type':'image-card','index': ALL}, 'id')
-    ]
+    State("liveview_label_modal_app", "is_open")
 )
-def show_box(
+def display_page(
     n_add : int,
     n_close : int,
-    n_clicks,
     is_open : bool,
+):
+    """Show modal for adding a label."""
+    triggered = dash.callback_context.triggered[0]['prop_id'].replace('.n_clicks','')
+    if json.loads(triggered):
+        return True
+    if triggered == "liveview_modal_close_button_app":
+        return False
+    return False
+
+@app.callback(
+    Output('selected_image','children'),
+    Input({'type':'image-card','index': ALL}, 'n_clicks'),
+    State({'type':'image-card','index': ALL}, 'id')
+)
+def show_box(
+    n_clicks,
     entry_id
 ):
     # get index of clicked image
     triggered = dash.callback_context.triggered[0]['prop_id'].replace('.n_clicks','')
-    if triggered != '':
-        trigger = json.loads(triggered)
-        trigger_index = trigger['index']
-        # get image url from image
-        image_url = image_search.at[trigger_index,'Image_url']
-        kids = html.Div(
-            html.Img(
-                src = image_url,
-                style = {
-                    'width' : '60vw'
-                }
-            )
+    trigger = json.loads(triggered)
+    trigger_index = trigger['index']
+    # get image url from image
+    image_url = image_search.at[trigger_index,'Image_url']
+    kids = html.Div(
+        html.Img(
+            src = image_url,
+            style = {
+                'width' : '60vw'
+            }
         )
-        return kids,True
-    if triggered == "liveview_modal_close_button_app":
-        return kids,False
-    return kids,False #"{}".format(image_url)
+    )
+    return kids #"{}".format(image_url)
 
 @app.callback(
     [
