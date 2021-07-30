@@ -366,7 +366,7 @@ popup_app = dbc.Modal(
                 )
             ])
         ),
-        dbc.ModalFooter(
+        dbc.ModalFooter([
             dbc.Button(
                 "Submit",
                 color = "primary",
@@ -377,7 +377,7 @@ popup_app = dbc.Modal(
                 color = "primary",
                 id = "liveview_modal_close_button_app"
             )
-        )
+        ])
     ],
     id = "liveview_label_modal_app"
 )
