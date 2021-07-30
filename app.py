@@ -240,10 +240,25 @@ maindiv = html.Div(
                 dbc.Col([
                     html.P("This work is a collaboration between the Museum of South Texas and the Planet Texas 2050 project with sponsorship from"),
                     html.Ul(children = [
-                        html.Li("The National Science Foundation Smart & Connected Cities program (award number 1952196)"),
+                        html.Li(
+                            dcc.Link(
+                                "The National Science Foundation Smart & Connected Cities program (award number 1952196)",
+                                href = 'nsf.gov/awardsearch/showAward?AWD_ID=1952196'
+                            )
+                        ),
+                        html.Li(
+                            dcc.Link(
+                                "The National Science Foundation Navigating the New Arctic program (award number (FAIN): 2127353)",
+                                href = 'nsf.gov/awardsearch/showAward?AWD_ID=2127353'
+                            )
+                        ),
                         html.Li("Microsoft Azure Intersectionality and Equity program"),
-                        html.Li("The Planet Texas project of the Bridging Barriers Program at The University of Texas at Austin"),
-                        html.Li("Navigating the New Arctic program (Award Number (FAIN): 2127353)")
+                        html.Li(
+                            dcc.Link(
+                                "The Planet Texas project of the Bridging Barriers Program at the University of Texas at Austin",
+                                href = 'bridgingbarriers.utexas.edu/planet-texas-2050'
+                            )
+                        )
                     ])
                 ])
             ),
