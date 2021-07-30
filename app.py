@@ -228,11 +228,14 @@ maindiv = html.Div(
                     )
                 ),
                 dbc.Col(
-                    html.Img(
-                        src = app.get_asset_url('Logo-NSF.png'),
-                        style = {
-                            'height' : '70px'
-                        }
+                    dcc.link(
+                        html.Img(
+                            src = app.get_asset_url('Logo-NSF.png'),
+                            style = {
+                                'height' : '70px'
+                            }
+                        ),
+                        href = 'https://nsf.gov'
                     )
                 )
             ]),
