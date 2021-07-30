@@ -386,11 +386,15 @@ popup_poster = dbc.Modal(
     [
         dbc.ModalHeader("Poster"),
         dbc.ModalBody(
-            html.Img(
-                src = app.get_asset_url('Poster.png'),
-                style = {
-                    'height' : '85vh'
-                }
+            dcc.Link(
+                html.Img(
+                    src = app.get_asset_url('Poster.png'),
+                    style = {
+                        'height' : '85vh'
+                    }
+                ),
+                href = app.get_asset_url('Poster.png'),
+                target = '_blank'
             )
         ),
         dbc.ModalFooter(
@@ -436,7 +440,7 @@ def show_box(hide_n_clicks, image_n_clicks):
     Output("liveview_label_modal_app", "is_open"),
     [
         Input({'type':'image-card','index': ALL}, 'n_clicks'),
-        Input("btn_submit", "n_clicks")
+        Input("btn_submit", "n_clicks"),
         Input("liveview_modal_close_button_app", "n_clicks")
     ],
     State("liveview_label_modal_app", "is_open")
