@@ -158,7 +158,6 @@ sidebar = html.Div(
 maindiv = html.Div(
     id = 'data-entry=form',
     children = [
-        popup_app,
         html.Footer([
             dbc.Row([
                 dbc.Col(
@@ -285,7 +284,10 @@ popup = dbc.Modal(
                     color = "primary",
                     id = "liveview_modal_ok_button"
                 ),
-                dbc.Button("Cancel", id="liveview_modal_cancel_button")
+                dbc.Button(
+                    "Cancel",
+                    id = "liveview_modal_cancel_button"
+                )
             ]
         )
     ],
@@ -402,6 +404,7 @@ app.layout = html.Div([
     sidebar,
     maindiv,
     popup_initial,
+    popup_app,
     popup,
     popup_poster
 ])
