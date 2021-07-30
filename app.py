@@ -156,51 +156,8 @@ sidebar = html.Div(
 )
 
 maindiv = html.Div(
-#    id = "first-div",
     id = 'data-entry=form',
     children = [
-        html.Div([
-            dbc.Row(
-                dbc.Col(
-                    [
-                        dl.Map(
-                            [dl.TileLayer(), dl.LayerGroup(id="layer")],
-                            center = [26.903, -98.158],
-                            zoom = 8,
-                            id = "map",
-                            style = {
-#                                'width' : '85%',
-                                'width' : '60vw',
-                                'height' : '43vh',
-                                'margin' : "auto",
-                                "display" : "block"
-                            }
-                        ),
-                        html.Div(id='map_location')
-                    ]#,
-#                    width='85%'
-                ),
-                id = 'data_entry'
-            ),
-            dbc.Row(
-                dbc.Col(
-                    html.Button(
-                        'Submit',
-                        id = 'btn_submit',
-                        n_clicks = 0
-                    )
-                )
-            ),
-            dbc.Row(
-                dbc.Col(
-                    [
-                        html.Div(
-                            id = 'selected_image'
-                        )
-                    ]
-                )
-            )
-        ]),
         html.Footer([
             dbc.Row([
                 dbc.Col(
@@ -361,6 +318,62 @@ popup_initial = dbc.Modal(
     id = "liveview_label_modal_initial"
 )
 
+popup_app = dbc.Modal(
+    [
+        dbc.ModalHeader("App"),
+        dbc.ModalBody(
+            html.Div([
+                dbc.Row(
+                    dbc.Col(
+                        [
+                            dl.Map(
+                                [dl.TileLayer(), dl.LayerGroup(id="layer")],
+                                center = [26.903, -98.158],
+                                zoom = 8,
+                                id = "map",
+                                style = {
+                                    'width' : '60vw',
+                                    'height' : '43vh',
+                                    'margin' : "auto",
+                                    "display" : "block"
+                                }
+                            ),
+                            html.Div(id='map_location')
+                        ]
+                    ),
+                    id = 'data_entry'
+                ),
+                dbc.Row(
+                    dbc.Col(
+                        html.Button(
+                            'Submit',
+                            id = 'btn_submit',
+                            n_clicks = 0
+                        )
+                    )
+                ),
+                dbc.Row(
+                    dbc.Col(
+                        [
+                            html.Div(
+                                id = 'selected_image'
+                            )
+                        ]
+                    )
+                )
+            ])
+        ),
+        dbc.ModalFooter(
+            dbc.Button(
+                "Close",
+                color = "primary",
+                id = "liveview_modal_close_button"
+            )
+        )
+    ],
+    id = "liveview_label_modal_app"
+)
+
 popup_poster = dbc.Modal(
     [
         dbc.ModalHeader("Poster"),
@@ -368,7 +381,7 @@ popup_poster = dbc.Modal(
             html.Img(
                 src = app.get_asset_url('Poster.png'),
                 style = {
-                    'width' : '85vw'
+                    'height' : '85vh'
                 }
             )
         ),
@@ -388,6 +401,7 @@ app.layout = html.Div([
     sidebar,
     maindiv,
     popup_initial,
+    popup_app,
     popup,
     popup_poster
 ])
