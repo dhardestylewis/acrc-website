@@ -228,7 +228,7 @@ maindiv = html.Div(
                     )
                 ),
                 dbc.Col(
-                    dcc.link(
+                    dcc.Link(
                         html.Img(
                             src = app.get_asset_url('Logo-NSF.png'),
                             style = {
@@ -246,20 +246,20 @@ maindiv = html.Div(
                         html.Li(
                             dcc.Link(
                                 "The National Science Foundation Smart & Connected Cities program (award number 1952196)",
-                                href = 'nsf.gov/awardsearch/showAward?AWD_ID=1952196'
+                                href = 'https://nsf.gov/awardsearch/showAward?AWD_ID=1952196'
                             )
                         ),
                         html.Li(
                             dcc.Link(
                                 "The National Science Foundation Navigating the New Arctic program (award number (FAIN): 2127353)",
-                                href = 'nsf.gov/awardsearch/showAward?AWD_ID=2127353'
+                                href = 'https://nsf.gov/awardsearch/showAward?AWD_ID=2127353'
                             )
                         ),
                         html.Li("Microsoft Azure Intersectionality and Equity program"),
                         html.Li(
                             dcc.Link(
                                 "The Planet Texas project of the Bridging Barriers Program at the University of Texas at Austin",
-                                href = 'bridgingbarriers.utexas.edu/planet-texas-2050'
+                                href = 'https://bridgingbarriers.utexas.edu/planet-texas-2050'
                             )
                         )
                     ])
