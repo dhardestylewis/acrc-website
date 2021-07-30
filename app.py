@@ -434,6 +434,7 @@ def show_box(hide_n_clicks, image_n_clicks):
 )
 def display_page(
     n_add : int,
+    n_clicks,
     n_close : int,
     is_open : bool,
 ):
